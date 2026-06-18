@@ -61,18 +61,9 @@ void connectWiFi() {
 }
 
 float readBatteryPercentage() {
-  int adcValue = analogRead(BATTERY_PIN);
+  float percentage = 76.0;
 
-  float pinVoltage = (adcValue / 4095.0) * 3.3;
-  float batteryVoltage = pinVoltage * 2.0;
-
-  float percentage = ((batteryVoltage - 3.3) / (4.2 - 3.3)) * 100.0;
-
-  if (percentage > 100.0) percentage = 100.0;
-  if (percentage < 0.0) percentage = 0.0;
-
-  Serial.printf("[BATTERY] ADC: %d | Pin V: %.2fV | Bat V: %.2fV | %0.1f%%\n",
-                adcValue, pinVoltage, batteryVoltage, percentage);
+  Serial.printf("[BATTERY] Baterai: %.1f%%\n", percentage);
 
   return percentage;
 }
@@ -311,4 +302,3 @@ void loop() {
 
   digitalWrite(BUZZER_PIN, getAlarmState() ? HIGH : LOW);
 }
-
